@@ -52,7 +52,7 @@ Main:addButton("Refill Stamina", function()
 	Stamina.Value = 100
 end)
 
-Main:addToggle("Infinite Stamina", nil, function(State)
+Main:addToggle("Infinite Stamina (doesnt turn off)", nil, function(State)
 	while true do
 		local Stamina = game:GetService("Players").LocalPlayer.PlayerGui.GameGui.BottomLeft.Health["Stamina LS"].Stamina
 		Stamina.Value = 100
