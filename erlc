@@ -1,0 +1,404 @@
+
+-- Library Loader
+
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/GreenDeno/Venyx-UI-Library/main/source.lua"))()
+local venyx = library.new("Random UI For ERLC", 5013109572)
+
+-- Themes
+
+local themes = {
+	Background = Color3.fromRGB(24, 24, 24),
+	Glow = Color3.fromRGB(0, 0, 0),
+	Accent = Color3.fromRGB(10, 10, 10),
+	LightContrast = Color3.fromRGB(20, 20, 20),
+	DarkContrast = Color3.fromRGB(14, 14, 14),  
+	TextColor = Color3.fromRGB(255, 255, 255)
+}
+
+-- Pages
+
+local MainPage = venyx:addPage("Main", 5012544693)
+local CrimPage = venyx:addPage("Criminal", 5012544693)
+local Weapons = venyx:addPage("Weapons", 5012544693)
+local Vehicle = venyx:addPage("Vehicle", 5012544693)
+local TPPage = venyx:addPage("Teleports", 5012544693)
+
+-- Main Tabs
+
+local Main = MainPage:addSection("Main")
+
+
+-- Teleport Tabs
+
+local TeleportsShops = TPPage:addSection("Main TPs")
+local TeleportsMisc = TPPage:addSection("Misc TPs")
+
+-- Criminal Tabs
+
+local Criminal = CrimPage:addSection("Criminal")
+local CriminalTps = CrimPage:addSection("Criminal TPs")
+local VehicleTabs = Vehicle:addSection("Vehicle")
+
+-- Weapons Tabs
+
+local WeaponsMods = Weapons:addSection("Weapon Mods")
+local Weapons = Weapons:addSection("Buy Weapons")
+
+-- Main
+
+
+Main:addButton("Refill Stamina", function()
+	local Stamina = game:GetService("Players").LocalPlayer.PlayerGui.GameGui.BottomLeft.Health["Stamina LS"].Stamina
+	Stamina.Value = 100
+end)
+
+Main:addToggle("Infinite Stamina", nil, function(State)
+	while true do
+		local Stamina = game:GetService("Players").LocalPlayer.PlayerGui.GameGui.BottomLeft.Health["Stamina LS"].Stamina
+		Stamina.Value = 100
+	end
+end)
+
+Main:addButton("Change To Police (wip)", function()
+	--LoadMenu
+
+	local args = {
+		[1] = "Civilian",
+		[2] = "MenuHint"
+	}
+
+	game:GetService("ReplicatedStorage").FE.NewPlayerTasks:FireServer(unpack(args))
+
+	--CanChangeTeam
+
+	local args = {
+		[1] = BrickColor.new(102)
+	}
+
+	game:GetService("ReplicatedStorage").FE.CanChangeTeam:InvokeServer(unpack(args))
+
+	--CheckCallSign
+
+	local args = {
+		[1] = "1137"
+	}
+
+	game:GetService("ReplicatedStorage").FE.CheckCallsign:InvokeServer(unpack(args))
+
+	--TeamChange
+
+	local args = {
+		[1] = BrickColor.new(102),
+		[2] = "1137"
+	}
+
+	game:GetService("ReplicatedStorage").FE.TeamChange:FireServer(unpack(args))
+end)
+
+Main:addButton("Change To Civilian", function()
+
+	--NewPlayerTasks
+
+	local args = {
+		[1] = "Civilian",
+		[2] = "MenuHint"
+	}
+
+	game:GetService("ReplicatedStorage").FE.NewPlayerTasks:FireServer(unpack(args))
+
+	--TeamChange
+
+	local args = {
+		[1] = BrickColor.new(311)
+	}
+
+	game:GetService("ReplicatedStorage").FE.TeamChange:FireServer(unpack(args))
+end)
+
+-- Criminal
+local plr = game:GetService('Players').LocalPlayer
+
+Criminal:addButton("Buy All Tools", function()
+	local OLDPOS = plr.Character.HumanoidRootPart.CFrame
+	
+	wait(0.3)
+	
+	plr.Character.HumanoidRootPart.CFrame = CFrame.new(-437, 25, -711)
+	
+	wait(0.3)
+
+	local args = {
+		[1] = "Lockpick"
+	}
+
+	game:GetService("ReplicatedStorage").FE.BuyGear:InvokeServer(unpack(args))
+
+	local args = {
+		[1] = "Drill"
+	}
+
+	game:GetService("ReplicatedStorage").FE.BuyGear:InvokeServer(unpack(args))
+
+
+	local args = {
+		[1] = "RFID Disruptor"
+	}
+
+	game:GetService("ReplicatedStorage").FE.BuyGear:InvokeServer(unpack(args))
+	
+	wait(0.2)
+
+	plr.Character.HumanoidRootPart.CFrame = OLDPOS
+end)
+
+CriminalTps:addButton("Jewlery Store", function()
+	plr.Character.HumanoidRootPart.CFrame = CFrame.new(-463, 23, -400)
+end)
+
+CriminalTps:addButton("Bank", function()
+	plr.Character.HumanoidRootPart.CFrame = CFrame.new(-1000, 24, 429)
+end)
+
+CriminalTps:addButton("ATM 1", function()
+	plr.Character.HumanoidRootPart.CFrame = CFrame.new(1000, 4, -25)
+end)
+
+CriminalTps:addButton("ATM 2", function()
+	plr.Character.HumanoidRootPart.CFrame = CFrame.new(808, 4, 378)
+end)
+
+CriminalTps:addButton("ATM 3", function()
+	plr.Character.HumanoidRootPart.CFrame = CFrame.new(-583, 23, -406)
+end)
+
+CriminalTps:addButton("ATM 4", function()
+	plr.Character.HumanoidRootPart.CFrame = CFrame.new(653, 4, -1534)
+end)
+
+CriminalTps:addButton("ATM 5", function()
+	plr.Character.HumanoidRootPart.CFrame = CFrame.new(-379, 24, 148)
+end)
+
+CriminalTps:addButton("ATM 6", function()
+	plr.Character.HumanoidRootPart.CFrame = CFrame.new(-469, 23, 387)
+end)
+
+
+Weapons:addButton("Buy Beretta M9 ($900)", function()
+	local OLDPOS = plr.Character.HumanoidRootPart.CFrame
+
+	wait(0.5)
+
+	plr.Character.HumanoidRootPart.CFrame = CFrame.new(-1223, 24, -192)
+
+	wait(0.5)
+
+	-- BuyGun Variable
+
+	local args = {
+		[1] = "Beretta M9"
+	}
+
+	game:GetService("ReplicatedStorage").FE.BuyGun:InvokeServer(unpack(args))
+
+	-- EquipGun Variable
+
+	local args = {
+		[1] = "Beretta M9",
+		[2] = true
+	}
+
+	game:GetService("ReplicatedStorage").FE.EquipGun:InvokeServer(unpack(args))
+
+	wait(0.3)
+
+	plr.Character.HumanoidRootPart.CFrame = OLDPOS
+end)
+
+Weapons:addButton("Buy M14 ($2,000)", function()
+
+	local OLDPOS = plr.Character.HumanoidRootPart.CFrame
+
+	wait(0.5)
+
+	plr.Character.HumanoidRootPart.CFrame = CFrame.new(-1223, 24, -192)
+
+	wait(0.5)
+
+	-- BuyGun Variable
+
+	local args = {
+		[1] = "M14"
+	}
+
+	game:GetService("ReplicatedStorage").FE.BuyGun:InvokeServer(unpack(args))
+
+	-- EquipGun Variable
+
+	local args = {
+		[1] = "M14",
+		[2] = true
+	}
+
+	game:GetService("ReplicatedStorage").FE.EquipGun:InvokeServer(unpack(args))
+
+	wait(0.3)
+
+	plr.Character.HumanoidRootPart.CFrame = OLDPOS
+
+end)
+
+Weapons:addButton("Colt M1911 ($1,200)", function()
+
+	local OLDPOS = plr.Character.HumanoidRootPart.CFrame
+
+	wait(0.5)
+
+	plr.Character.HumanoidRootPart.CFrame = CFrame.new(-1223, 24, -192)
+
+	wait(0.5)
+
+	-- BuyGun Variable
+
+	local args = {
+		[1] = "Colt M1911"
+	}
+
+	game:GetService("ReplicatedStorage").FE.BuyGun:InvokeServer(unpack(args))
+
+	-- EquipGun Variable
+
+	local args = {
+		[1] = "Colt M1911",
+		[2] = true
+	}
+
+	game:GetService("ReplicatedStorage").FE.EquipGun:InvokeServer(unpack(args))
+
+	wait(0.3)
+
+	plr.Character.HumanoidRootPart.CFrame = OLDPOS
+
+end)
+
+Weapons:addButton("AK47 ($2,250)", function()
+
+	local OLDPOS = plr.Character.HumanoidRootPart.CFrame
+
+	wait(0.5)
+
+	plr.Character.HumanoidRootPart.CFrame = CFrame.new(-1223, 24, -192)
+
+	wait(0.5)
+
+
+	-- BuyGun Variable
+
+	local args = {
+		[1] = "AK47"
+	}
+
+	game:GetService("ReplicatedStorage").FE.BuyGun:InvokeServer(unpack(args))
+
+	-- EquipGun Variable
+
+	local args = {
+		[1] = "AK47",
+		[2] = true
+	}
+
+	game:GetService("ReplicatedStorage").FE.EquipGun:InvokeServer(unpack(args))
+
+	wait(0.3)
+
+	plr.Character.HumanoidRootPart.CFrame = OLDPOS
+
+end)
+
+Weapons:addButton("Skorpion ($1,400)", function()
+
+	local OLDPOS = plr.Character.HumanoidRootPart.CFrame
+
+	wait(0.5)
+
+	plr.Character.HumanoidRootPart.CFrame = CFrame.new(-1223, 24, -192)
+
+	wait(0.5)
+
+
+	-- BuyGun Variable
+
+	local args = {
+		[1] = "Skorpion"
+	}
+
+	game:GetService("ReplicatedStorage").FE.BuyGun:InvokeServer(unpack(args))
+
+	-- EquipGun Variable
+
+	local args = {
+		[1] = "Skorpion",
+		[2] = true
+	}
+
+	game:GetService("ReplicatedStorage").FE.EquipGun:InvokeServer(unpack(args))
+
+	wait(0.3)
+
+	plr.Character.HumanoidRootPart.CFrame = OLDPOS
+
+end)
+
+-- Teleports
+
+TeleportsShops:addButton("Spawn", function()
+	plr.Character.HumanoidRootPart.CFrame = CFrame.new(-535, 23, 641)
+end)
+
+TeleportsShops:addButton("Gun Store", function()
+	plr.Character.HumanoidRootPart.CFrame = CFrame.new(-1232, 24, -197)
+end)
+
+TeleportsShops:addButton("Tool Store", function()
+	plr.Character.HumanoidRootPart.CFrame = CFrame.new(-449, 23, -732)
+end)
+
+TeleportsShops:addButton("Bank", function()
+	plr.Character.HumanoidRootPart.CFrame = CFrame.new(-1000, 24, 429)
+end)
+
+TeleportsShops:addButton("Jewlery Store", function()
+	plr.Character.HumanoidRootPart.CFrame = CFrame.new(-463, 23, -400)
+end)
+
+TeleportsMisc:addButton("Jail", function()
+	plr.Character.HumanoidRootPart.CFrame = CFrame.new(1343, 3, -325)
+end)
+
+TeleportsMisc:addButton("Auto Shop", function()
+	plr.Character.HumanoidRootPart.CFrame = CFrame.new(-711, 23, 223)
+end)
+
+TeleportsMisc:addButton("Hospital", function()
+	plr.Character.HumanoidRootPart.CFrame = CFrame.new(-143, 23, -404)
+end)
+
+TeleportsMisc:addButton("Sheriff Office", function()
+	plr.Character.HumanoidRootPart.CFrame = CFrame.new(-808, 24, -723)
+end)
+
+TeleportsMisc:addButton("Police Station", function()
+	plr.Character.HumanoidRootPart.CFrame = CFrame.new(770, 4, -96)
+end)
+
+TeleportsMisc:addButton("Parking Garage", function()
+	plr.Character.HumanoidRootPart.CFrame = CFrame.new(-327, 52, 150)
+end)
+
+TeleportsMisc:addButton("Barn", function()
+	plr.Character.HumanoidRootPart.CFrame = CFrame.new(845, 3, -1140)
+end)
+
+TeleportsMisc:addButton("Fire Station", function()
+	plr.Character.HumanoidRootPart.CFrame = CFrame.new(-977, 23, 139)
+end)
